@@ -1,0 +1,105 @@
+{
+  "name": "kyma-cap-s4ems",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap-cloud-sdk/http-client": "^2.5.0",
+    "@sap-cloud-sdk/util": "^2.5.0",
+    "@sap/cds": "6.6.0",
+    "@sap/xb-msg-amqp-v100": "0.9.52",
+    "@sap/xssec": "^3.2.3",
+    "express": "^4",
+    "hdb": "^0.18.2",
+    "passport": "^0.4.1",
+    "postcode-validator": "^3.5.3",
+    "cloudevents": "^5.3.0"
+  },
+  "devDependencies": {
+    "@sap/ux-specification": "^1.90.15",
+    "sqlite3": "5.0.8",
+    "jest": "*",
+    "mocha": "^9.2.1",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0"
+  },
+  "scripts": {
+    "start": "cds run",
+    "test": "mocha tests/mocha.test.js --timeout 35000 --retries 5",
+    "test:integration": "mocha tests/mocha.test.js --timeout 35000",
+    "watch-businesspartner": "cds watch --open businesspartner/webapp/index.html#fe-lrop-v4",
+    "watch-businesspartners": "cds watch --open businesspartners/webapp/index.html#fe-lrop-v4"
+  },
+  "cds": {
+    "features": {
+      "emulate_vcap_services": true
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
+    "requires": {
+      "[production]": {
+        "db": {
+          "kind": "sql",
+          "model": [
+            "db",
+            "srv"
+          ],
+          "vcap": {
+            "label": "hana"
+          }
+        }
+      },
+      "messaging": {
+        "kind": "local-messaging",
+        "[production]": {
+          "kind": "enterprise-messaging-shared",
+          "queue": {
+            "name": "$namespace/CAP/0001"
+          },
+          "vcap": {
+            "label": "enterprise-messaging"
+          },
+          "publishPrefix": "$namespace/",
+          "subscribePrefix": "$namespace/"
+        },
+        "format": "cloudevents"
+      },
+      "uaa": {
+        "kind": "xsuaa",
+        "vcap": {
+          "label": "xsuaa"
+        }
+      },
+      "destination": {
+        "vcap": {
+          "label": "destination"
+        }
+      },
+      "connectivity": {
+        "vcap": {
+          "label": "connectivity"
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "[production]": {
+          "credentials": {
+            "destination": "s4h",
+            "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+          }
+        }
+      },
+      "auth": {
+        "kind": "xsuaa"
+      }
+    }
+  },
+  "sapux": [
+    "app/businesspartners",
+    "app/businesspartners"
+  ]
+}
