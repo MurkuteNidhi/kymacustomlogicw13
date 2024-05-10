@@ -1,4 +1,4 @@
-DOCKER_ACCOUNT=<DOCKER_REPOSITORY>
+DOCKER_ACCOUNT=nidhimurkute
 
 cds-build:
 	npm i
