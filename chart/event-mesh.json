@@ -1,6 +1,6 @@
 {
-    "emname": "bpems",
-    "namespace": "refapps/bpems/event",
+    "emname": "bems",
+    "namespace": "refapps/bems/event",
     "options": {
       "management": true,
       "messaging": true,

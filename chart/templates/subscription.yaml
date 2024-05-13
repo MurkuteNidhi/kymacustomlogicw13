@@ -7,7 +7,7 @@ metadata:
     name: kyma-cap-s4ems
 spec:
   typeMatching: standard
-  source: /default/bp.ems/bpems
+  source: /default/bp.ems/bems
   types:
     - bp.notification.v1
   sink: http://{{ .Release.Name }}-qrcodegenerator.{{.Values.namespace}}.svc.cluster.local #this is the service name and port

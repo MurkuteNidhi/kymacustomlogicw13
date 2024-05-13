@@ -90,7 +90,7 @@ module.exports = async srv => {
     // Format JSON as per serverless requires
     const payload = new CloudEvent({
       type: "bp.notification.v1",
-      source: "/default/bp.ems/bpems",
+      source: "/default/bp.ems/bems",
       data: {
           "businessPartner": resultJoin.businessPartnerId,
           "businessPartnerName": resultJoin.businessPartnerName,

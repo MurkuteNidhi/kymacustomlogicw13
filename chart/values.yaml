@@ -1,7 +1,6 @@
 global:
   domain: c-4199fbe.kyma.ondemand.com
-  imagePullSecret:
-    name: {}
+  imagePullSecret: {}
 srv:
   bindings:
     destination:
@@ -39,10 +38,10 @@ srv:
       projected:
         sources:
           - secret:
-              name: <kyma-cap-s4ems-connectivity-secret>
+              name: kyma-cap-s4ems-connectivity-secret
               optional: false
           - secret:
-              name: <kyma-cap-s4ems-connectivity-secret>
+              name: kyma-cap-s4ems-connectivity-secret
               optional: false
               items:
                 - key: token_service_url
